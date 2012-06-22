@@ -1,1 +1,10 @@
 *.elc
+build-stamp
+configure-stamp
+*~
+.DS_Store
+.emacs.d/semanticdb
+.emacs.d/places
+.emacs.d/recentf
+.emacs.d/savehist
+.emacs.d/helm-c-adaptive-history
