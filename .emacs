@@ -57,7 +57,9 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (autoload 'ghc-init (concat user-emacs-directory (convert-standard-filename "site-lisp/ghc-mod/ghc.el")) nil t)
-;; (add-hook 'haskell-mode-hook (lambda () (ghc-init) (flymake-mode)))
+(add-hook 'haskell-mode-hook (lambda () (ghc-init) (flymake-mode)))
+(define-key haskell-mode-map (kbd "C-c t") 'ghc-flymake-toggle-command)
+(define-key haskell-mode-map (kbd "C-c i") 'ghc-flymake-insert-from-warning)
 
 (define-key isearch-mode-map (kbd "C-o")
   (lambda ()
@@ -171,8 +173,6 @@
 	  (lambda () (flymake-ruby-load)))
 (add-hook 'sh-mode-hook
 	  (lambda () (flymake-shell-load)))
-(add-hook 'haskell-mode-hook
-	  (lambda () (flymake-haskell-load)))
 
 (eval-after-load 'haskell-mode
   '(progn
