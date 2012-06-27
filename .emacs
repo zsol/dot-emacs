@@ -86,8 +86,9 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (autoload 'ghc-init (concat user-emacs-directory (convert-standard-filename "site-lisp/ghc-mod/ghc.el")) nil t)
 (add-hook 'haskell-mode-hook (lambda () (ghc-init) (flymake-mode)))
-(define-key haskell-mode-map (kbd "C-c t") 'ghc-flymake-toggle-command)
-(define-key haskell-mode-map (kbd "C-c i") 'ghc-flymake-insert-from-warning)
+(eval-after-load 'haskell-mode
+  '(progn
+     (define-key haskell-mode-map (kbd "C-c i") 'ghc-flymake-insert-from-warning)))
 
 (define-key isearch-mode-map (kbd "C-o")
   (lambda ()
@@ -287,6 +288,7 @@
  '(custom-enabled-themes (quote (zsol)))
  '(custom-safe-themes (quote ("e9143042f8b9a18cb44042e61c8c0d9da0e033b01d26f2a176c7fe9204476a4d" default)))
  '(ede-project-directories (quote ("/Users/zsol/Workspace/prezi-repo/prezi.dev" "/Users/zsol/Workspace/prezi-repo/prezi.dev/server" "/Users/zsol/Workspace/prezi-repo/prezi.dev/server/django/zuisite")))
+ '(flymake-log-level 0)
  '(helm-c-default-external-file-browser "open")
  '(helm-c-use-adaptative-sorting t)
  '(helm-command-prefix-key "C-<return>")
@@ -309,8 +311,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(diff-file-header ((((class color) (min-colors 88) (background dark)) (:background "#222" :weight bold))) t)
- '(diff-header ((((class color) (min-colors 88) (background dark)) (:background "#222"))) t)
+ '(diff-file-header ((((class color) (min-colors 88) (background dark)) (:background "#222" :weight bold))))
+ '(diff-header ((((class color) (min-colors 88) (background dark)) (:background "#222"))))
  '(helm-grep-match ((t (:inherit match :background "darkblue"))) t)
  '(helm-selection ((t (:background "ForestGreen" :foreground "black" :underline t))) t)
  '(helm-selection-line ((t (:background "darkred" :underline t))) t))
