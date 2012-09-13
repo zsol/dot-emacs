@@ -320,7 +320,7 @@
  '(python-pylint-command "~/Workspace/prezi-repo/prezi.dev/server/env-prezi.dev/bin/pylint")
  '(ruby-deep-arglist nil)
  '(ruby-deep-indent-paren nil)
- '(safe-local-variable-values (quote ((virtualenv-default-directory . "/Users/zsol/Workspace/prezi-repo/prezi.dev/server/missioncontrol") (virtualenv-workon . "env-prezi.dev") (encoding . utf-8))))
+ '(safe-local-variable-values (quote ((ftf-filetypes "*") (ftf-filetypes quote ("*")) (ftf-filetypes ((quote "**"))) (ftf-filetypes ("**")) (ftf-filetypes (quote ("**"))) (ftf-filetypes ("*")) (ftf-filetypes (quote ("*"))) (virtualenv-default-directory . "/Users/zsol/Workspace/prezi-repo/prezi.dev/server/missioncontrol") (virtualenv-workon . "env-prezi.dev") (encoding . utf-8))))
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
