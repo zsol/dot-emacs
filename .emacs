@@ -327,9 +327,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(diff-file-header ((((class color) (min-colors 88) (background dark)) (:background "#222" :weight bold))))
- '(diff-header ((((class color) (min-colors 88) (background dark)) (:background "#222"))))
+ '(diff-file-header ((((class color) (min-colors 88) (background dark)) (:background "#222" :weight bold))) t)
+ '(diff-header ((((class color) (min-colors 88) (background dark)) (:background "#222"))) t)
  '(helm-grep-match ((t (:inherit match :background "darkblue"))) t)
  '(helm-selection ((t (:background "ForestGreen" :foreground "black" :underline t))) t)
- '(helm-selection-line ((t (:background "darkred" :underline t))) t))
+ '(helm-selection-line ((t (:background "darkred" :underline t))) t)
+ '(mumamo-background-chunk-major ((t (:background "controlDarkShadowColor"))))
+ '(mumamo-background-chunk-submode1 ((t nil))))
 
