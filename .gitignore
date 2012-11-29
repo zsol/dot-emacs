@@ -8,3 +8,6 @@ configure-stamp
 .emacs.d/recentf
 .emacs.d/savehist
 .emacs.d/helm-c-adaptive-history
+.emacs.d/url
+.emacs.d/tramp
+.emacs.d/elpa/archives
