@@ -184,6 +184,19 @@
 ;; 	     ))
 (flymake-cursor-mode 1)
 
+(setq jsonlint "jsonlint")
+(when (load "flymake" t)
+  (defun flymake-jsonlint-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-intemp))
+           (arglist (list "-c" temp-file)))
+      (if (not (string-match-p tramp-file-name-regexp buffer-file-name))
+          (list jsonlint arglist))))
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.json\\'" flymake-jsonlint-init)))
+(add-hook 'json-mode-hook
+          (lambda () (flymake-mode 1)))
+
 (setq pycodechecker "lintrunner")
 (when (load "flymake" t)
   (defun dss/flymake-pycodecheck-init ()
