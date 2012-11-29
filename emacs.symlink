@@ -77,6 +77,8 @@
 (require 'yaml-mode)
 (require 'json-mode)
 (add-to-list 'auto-mode-alist '("\\.json" . json-mode))
+(require 'powerline)
+(setq powerline-arrow-shape 'arrow14)
 
 (autoload 'haxe-mode "haxe-mode")
 (add-to-list 'auto-mode-alist '("\\.hx" . haxe-mode))

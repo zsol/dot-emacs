@@ -17,3 +17,6 @@
 [submodule "yaml-mode"]
     path = emacs.d.symlink/site-lisp/yaml-mode
     url = https://github.com/yoshiki/yaml-mode.git
+[submodule "emacs.d.symlink/site-lisp/emacs-powerline"]
+	path = emacs.d.symlink/site-lisp/emacs-powerline
+	url = git://github.com/jonathanchu/emacs-powerline.git
