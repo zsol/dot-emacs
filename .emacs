@@ -309,6 +309,12 @@
   "Major mode for editing Markdown files" t)
 (setq auto-mode-alist
       (cons '("\\.md" . markdown-mode) auto-mode-alist))
+
+(setq org-timer-default-timer 25)
+(add-hook 'org-clock-in-hook '(lambda () 
+      (if (not org-timer-current-timer) 
+      (org-timer-set-timer '(16)))))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
