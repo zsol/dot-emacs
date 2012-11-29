@@ -1,0 +1,20 @@
+[submodule "haskell-mode"]
+    path = .emacs.d/site-lisp/haskell-mode
+    url = git://github.com/haskell/haskell-mode.git
+
+[submodule "emacs-helm"]
+    path = .emacs.d/site-lisp/helm
+    url = https://github.com/emacs-helm/helm.git
+
+[submodule "json-mode"]
+    path = .emacs.d/site-lisp/json-mode
+    url = https://github.com/joshwnj/json-mode.git
+
+[submodule "markdown-mode"]
+    path = .emacs.d/site-lisp/markdown-mode
+    url = git://jblevins.org/git/markdown-mode.git
+
+[submodule "yaml-mode"]
+    path = .emacs.d/site-lisp/yaml-mode
+    url = https://github.com/yoshiki/yaml-mode.git
+
