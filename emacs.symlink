@@ -240,6 +240,7 @@
 (electric-pair-mode 1)
 
 (load "~/find-things-fast/find-things-fast.el")
+(setq ftf-grep-command "ag -S --nogroup --column")
 (global-set-key (kbd "C-x C-d") 'find-name-dired)
 (global-set-key (kbd "C-c f") 'ftf-find-file)
 (global-set-key (kbd "C-c d") 'ftf-find-file-in-parent)
@@ -325,6 +326,7 @@
  '(custom-enabled-themes (quote (zsol)))
  '(custom-safe-themes (quote ("e9143042f8b9a18cb44042e61c8c0d9da0e033b01d26f2a176c7fe9204476a4d" default)))
  '(flymake-log-level 0)
+ '(grep-command "ag --nogroup --column -S ")
  '(helm-c-default-external-file-browser "open")
  '(helm-c-use-adaptative-sorting t)
  '(helm-command-prefix-key "C-<return>")
