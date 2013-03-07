@@ -20,3 +20,6 @@
 [submodule "emacs.d.symlink/site-lisp/emacs-powerline"]
 	path = emacs.d.symlink/site-lisp/emacs-powerline
 	url = git://github.com/jonathanchu/emacs-powerline.git
+[submodule "emacs.d.symlink/emacs-color-theme-solarized"]
+	path = emacs.d.symlink/emacs-color-theme-solarized
+	url = git://github.com/sellout/emacs-color-theme-solarized.git
