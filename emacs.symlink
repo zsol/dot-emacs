@@ -247,6 +247,8 @@
 (global-set-key (kbd "C-c s") 'ftf-grepsource)
 (load (concat user-emacs-directory (convert-standard-filename "site-lisp/cdargs.el")))
 
+(global-whitespace-mode 1)
+
 (defun cv-buffer ()
   "Change the current buffer's working directory to the visited file's
   location"
@@ -326,6 +328,7 @@
  '(custom-enabled-themes (quote (zsol)))
  '(custom-safe-themes (quote ("e9143042f8b9a18cb44042e61c8c0d9da0e033b01d26f2a176c7fe9204476a4d" default)))
  '(flymake-log-level 0)
+ '(global-whitespace-mode t)
  '(grep-command "ag --nogroup --column -S ")
  '(helm-c-default-external-file-browser "open")
  '(helm-c-use-adaptative-sorting t)
@@ -343,7 +346,9 @@
  '(ruby-deep-arglist nil)
  '(ruby-deep-indent-paren nil)
  '(safe-local-variable-values (quote ((ftf-filetypes "*") (ftf-filetypes quote ("*")) (ftf-filetypes ((quote "**"))) (ftf-filetypes ("**")) (ftf-filetypes (quote ("**"))) (ftf-filetypes ("*")) (ftf-filetypes (quote ("*"))) (virtualenv-workon . "env-prezi.dev") (encoding . utf-8))))
- '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
+ '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+ '(whitespace-action (quote (cleanup warn-if-read-only)))
+ '(whitespace-style (quote (face trailing tabs))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
