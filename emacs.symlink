@@ -347,6 +347,7 @@
  '(ruby-deep-arglist nil)
  '(ruby-deep-indent-paren nil)
  '(safe-local-variable-values (quote ((ftf-filetypes "*") (ftf-filetypes quote ("*")) (ftf-filetypes ((quote "**"))) (ftf-filetypes ("**")) (ftf-filetypes (quote ("**"))) (ftf-filetypes ("*")) (ftf-filetypes (quote ("*"))) (virtualenv-workon . "env-prezi.dev") (encoding . utf-8))))
+ '(tramp-auto-save-directory "/tmp/tramp.autosave")
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(whitespace-action (quote (cleanup warn-if-read-only)))
  '(whitespace-style (quote (face trailing tabs))))
