@@ -23,3 +23,6 @@
 [submodule "emacs.d.symlink/emacs-color-theme-solarized"]
 	path = emacs.d.symlink/emacs-color-theme-solarized
 	url = git://github.com/sellout/emacs-color-theme-solarized.git
+[submodule "emacs.d.symlink/site-lisp/find-things-fast"]
+	path = emacs.d.symlink/site-lisp/find-things-fast
+	url = git@github.com:zsol/find-things-fast
