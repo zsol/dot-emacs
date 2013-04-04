@@ -239,23 +239,14 @@
 (show-paren-mode 1)
 (electric-pair-mode 1)
 
-(load "~/find-things-fast/find-things-fast.el")
+(require 'find-things-fast)
 (setq ftf-grep-command "ag -S --nogroup --column")
 (global-set-key (kbd "C-x C-d") 'find-name-dired)
 (global-set-key (kbd "C-c f") 'ftf-find-file)
 (global-set-key (kbd "C-c d") 'ftf-find-file-in-parent)
 (global-set-key (kbd "C-c s") 'ftf-grepsource)
-(load (concat user-emacs-directory (convert-standard-filename "site-lisp/cdargs.el")))
 
 (global-whitespace-mode 1)
-
-(defun cv-buffer ()
-  "Change the current buffer's working directory to the visited file's
-  location"
-  (interactive)
-  (cd (file-name-directory buffer-file-name))
-  (run-hooks 'cdargs-warped-hook))
-
 
 ;; (require 'comint)
 ;; (define-key comint-mode-map [(meta p)]
