@@ -11,3 +11,5 @@ emacs.d.symlink/helm-c-adaptive-history
 emacs.d.symlink/url
 emacs.d.symlink/tramp
 emacs.d.symlink/elpa/archives
+emacs.d.symlink/session.*
+emacs.d.symlink/ido.last
