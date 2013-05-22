@@ -248,6 +248,7 @@
 
 (global-whitespace-mode 1)
 
+(define-coding-system-alias 'UTF-8 'utf-8)
 ;; (require 'comint)
 ;; (define-key comint-mode-map [(meta p)]
 ;;    'comint-previous-matching-input-from-input)
