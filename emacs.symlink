@@ -201,7 +201,7 @@
 (add-hook 'json-mode-hook
           (lambda () (flymake-mode 1)))
 
-(setq pycodechecker "lintrunner")
+(setq pycodechecker "/Users/zsol/.dotfiles/bin/lintrunner")
 (when (load "flymake" t)
   (defun dss/flymake-pycodecheck-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy
