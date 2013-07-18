@@ -85,9 +85,6 @@
 (autoload 'haxe-mode "haxe-mode")
 (add-to-list 'auto-mode-alist '("\\.hx" . haxe-mode))
 
-(load (concat user-emacs-directory (convert-standard-filename "site-lisp/haskell-mode/haskell-site-file")))
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (autoload 'ghc-init (concat user-emacs-directory (convert-standard-filename "site-lisp/ghc-mod/ghc.el")) nil t)
 (add-hook 'haskell-mode-hook (lambda () (ghc-init) (flymake-mode)))
 (eval-after-load 'haskell-mode
@@ -329,6 +326,16 @@
  '(flymake-log-level 0)
  '(global-whitespace-mode t)
  '(grep-command "ag --nogroup --column -S ")
+ '(haskell-check-command "hlint")
+ '(haskell-mode-hook
+   (quote
+    (turn-on-haskell-indent turn-on-font-lock turn-on-haskell-doc-mode
+                            (lambda nil
+                              (run-hooks
+                               (quote prelude-haskell-mode-hook)))
+                            (lambda nil
+                              (ghc-init)
+                              (flymake-mode)))))
  '(helm-c-default-external-file-browser "open")
  '(helm-c-use-adaptative-sorting t)
  '(helm-command-prefix-key "C-<return>")

@@ -21,11 +21,8 @@
 ;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-;; Boston, MA 02111-1307, USA.
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 ;;; Commentary:
 
 ;; Purpose:
@@ -99,10 +96,9 @@
 
 ;;; Code:
 
-(eval-when-compile
-  (require 'haskell-mode)
-  (require 'cl))
+(require 'haskell-mode)
 (require 'font-lock)
+(with-no-warnings (require 'cl))
 
 (defcustom haskell-font-lock-symbols nil
   "Display \\ and -> and such using symbols in fonts.
@@ -230,9 +226,6 @@ Regexp match data 0 points to the chars."
   ;; Return nil because we're not adding any face property.
   nil)
 
-(unless (fboundp 'char-displayable-p)
-  (require 'latin1-disp nil t))
-
 (defun haskell-font-lock-symbols-keywords ()
   (when (fboundp 'compose-region)
     (let ((alist nil))
@@ -272,7 +265,8 @@ Returns keywords suitable for `font-lock-keywords'."
 
          ;; We allow _ as the first char to fit GHC
          (varid "\\b[[:lower:]_][[:alnum:]'_]*\\b")
-         (conid "\\b[[:upper:]][[:alnum:]'_]*\\b")
+         ;; We allow ' preceding conids because of DataKinds/PolyKinds
+         (conid "\\b'?[[:upper:]][[:alnum:]'_]*\\b")
 	 (modid (concat "\\b" conid "\\(\\." conid "\\)*\\b"))
          (qvarid (concat modid "\\." varid))
          (qconid (concat modid "\\." conid))
@@ -302,7 +296,7 @@ Returns keywords suitable for `font-lock-keywords'."
 		  ;;    "else" "if" "import" "in" "infix" "infixl"
                   ;;    "infixr" "instance" "let" "module" "newtype" "of"
                   ;;    "then" "type" "where" "_") t)
-		  "\\(_\\|c\\(ase\\|lass\\)\\|d\\(ata\\|e\\(fault\\|riving\\)\\|o\\)\\|else\\|i\\(mport\\|n\\(fix[lr]?\\|stance\\)\\|[fn]\\)\\|let\\|module\\|newtype\\|of\\|t\\(hen\\|ype\\)\\|where\\)"
+		  "\\(_\\|c\\(ase\\|lass\\)\\|d\\(ata\\|e\\(fault\\|riving\\)\\|o\\)\\|else\\|i\\(mport\\|n\\(fix[lr]?\\|stance\\)\\|[fn]\\)\\|let\\|module\\|mdo\\|newtype\\|of\\|rec\\|proc\\|t\\(hen\\|ype\\)\\|where\\)"
 		  "\\>"))
 
          ;; This unreadable regexp matches strings and character
@@ -316,7 +310,8 @@ Returns keywords suitable for `font-lock-keywords'."
 
 	 ;; Top-level declarations
 	 (topdecl-var
-	  (concat line-prefix "\\(" varid "\\)\\s-*\\("
+	  (concat line-prefix "\\(" varid "\\)\\s-*\\([
+]*\\s-+\\)*\\("
                   ;; A toplevel declaration can be followed by a definition
                   ;; (=), a type (::) or (∷), a guard, or a pattern which can
                   ;; either be a variable, a constructor, a parenthesized
@@ -333,7 +328,10 @@ Returns keywords suitable for `font-lock-keywords'."
     (setq keywords
 	  `(;; NOTICE the ordering below is significant
 	    ;;
-	    ("^#.*$" 0 'font-lock-warning-face t)
+            ("^<<<<<<< .*$" 0 'font-lock-warning-face t)
+            ("^=======" 0 'font-lock-warning-face t)
+            ("^>>>>>>> .*$" 0 'font-lock-warning-face t)
+	    ("^#.*$" 0 'font-lock-preprocessor-face t)
 	    ,@(unless haskell-emacs21-features ;Supports nested comments?
 		;; Expensive.
 		`((,string-and-char 1 font-lock-string-face)))
@@ -347,9 +345,27 @@ Returns keywords suitable for `font-lock-keywords'."
 
 	    (,reservedid 1 (symbol-value 'haskell-keyword-face))
 	    (,reservedsym 1 (symbol-value 'haskell-operator-face))
-            ;; Special case for `as', `hiding', and `qualified', which are
+            ;; Special case for `as', `hiding', `safe' and `qualified', which are
             ;; keywords in import statements but are not otherwise reserved.
-            ("\\<import[ \t]+\\(?:\\(qualified\\>\\)[ \t]*\\)?[^ \t\n()]+[ \t]*\\(?:\\(\\<as\\>\\)[ \t]*[^ \t\n()]+[ \t]*\\)?\\(\\<hiding\\>\\)?"
+            ("\\<import[ \t]+\\(?:\\(safe\\>\\)[ \t]*\\)?\\(?:\\(qualified\\>\\)[ \t]*\\)?[^ \t\n()]+[ \t]*\\(?:\\(\\<as\\>\\)[ \t]*[^ \t\n()]+[ \t]*\\)?\\(\\<hiding\\>\\)?"
+             (1 (symbol-value 'haskell-keyword-face) nil lax)
+             (2 (symbol-value 'haskell-keyword-face) nil lax)
+             (3 (symbol-value 'haskell-keyword-face) nil lax)
+             (4 (symbol-value 'haskell-keyword-face) nil lax))
+
+	    (,reservedsym 1 (symbol-value 'haskell-operator-face))
+            ;; Special case for `foreign import'
+            ;; keywords in foreign import statements but are not otherwise reserved.
+            ("\\<\\(foreign\\)[ \t]+\\(import\\)[ \t]+\\(?:\\(ccall\\|stdcall\\|cplusplus\\|jvm\\|dotnet\\)[ \t]+\\)?\\(?:\\(safe\\|unsafe\\|interruptible\\)[ \t]+\\)?"
+             (1 (symbol-value 'haskell-keyword-face) nil lax)
+             (2 (symbol-value 'haskell-keyword-face) nil lax)
+             (3 (symbol-value 'haskell-keyword-face) nil lax)
+             (4 (symbol-value 'haskell-keyword-face) nil lax))
+
+	    (,reservedsym 1 (symbol-value 'haskell-operator-face))
+            ;; Special case for `foreign export'
+            ;; keywords in foreign export statements but are not otherwise reserved.
+            ("\\<\\(foreign\\)[ \t]+\\(export\\)[ \t]+\\(?:\\(ccall\\|stdcall\\|cplusplus\\|jvm\\|dotnet\\)[ \t]+\\)?"
              (1 (symbol-value 'haskell-keyword-face) nil lax)
              (2 (symbol-value 'haskell-keyword-face) nil lax)
              (3 (symbol-value 'haskell-keyword-face) nil lax))
@@ -506,7 +522,7 @@ that should be commented under LaTeX-style literate scripts."
    ((and haskell-font-lock-haddock
          (save-excursion
            (goto-char (nth 8 state))
-           (or (looking-at "\\(-- \\|{-\\)[|^]")
+           (or (looking-at "\\(-- \\|{-\\)[ \\t]*[|^]")
                (and haskell-font-lock-seen-haddock
                     (looking-at "-- ")
                     (let ((doc nil)
@@ -534,6 +550,7 @@ that should be commented under LaTeX-style literate scripts."
   (haskell-font-lock-keywords-create 'latex)
   "Font lock definitions for LaTeX-style literate Haskell.")
 
+;;;###autoload
 (defun haskell-font-lock-choose-keywords ()
   (let ((literate (if (boundp 'haskell-literate) haskell-literate)))
     (case literate
@@ -629,5 +646,9 @@ Invokes `haskell-font-lock-hook' if not nil."
 
 (provide 'haskell-font-lock)
 
-;; arch-tag: 89fd122e-8378-4c7f-83a3-1f49a64e458d
+;; Local Variables:
+;; byte-compile-warnings: (not cl-functions)
+;; tab-width: 8
+;; End:
+
 ;;; haskell-font-lock.el ends here
