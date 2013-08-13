@@ -65,8 +65,44 @@
 
 (global-hl-line-mode +1)
 
+(require 'ag)
+(require 'wgrep-ag)
+(require 'unfill)
+(require 'whole-line-or-region)
+(whole-line-or-region-mode t)
+(require 'undo-tree)
+(global-undo-tree-mode)
+(require 'mic-paren)
+(paren-activate)
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+(require 'move-text)
+(move-text-default-bindings)
+(global-set-key [M-S-up] 'move-text-up)
+(global-set-key [M-S-down] 'move-text-down)
+
+(require 'visual-regexp)
+(global-set-key [remap query-replace-regexp] 'vr/query-replace)
+(global-set-key [remap replace-regexp] 'vr/replace)
+
+(setq-default
+ ag-highlight-search t
+ delete-selection-mode t
+ ediff-split-window-function 'split-window-horizontally
+ ediff-window-setup-function 'ediff-setup-windows-plain
+ make-backup-files nil
+ scroll-preserve-screen-position 'always
+ show-trailing-whitespace t)
+
+(global-auto-revert-mode)
+(setq global-auto-revert-non-file-buffers t
+      auto-revert-verbose nil)
+
+(transient-mark-mode t)
 (require 'volatile-highlights)
 (volatile-highlights-mode t)
+
 
 (icomplete-mode +1)
 
@@ -76,6 +112,21 @@
 
 (require 'uniquify)
 (require 'ido)
+(require 'ido-ubiquitous)
+(ido-mode 1)
+(ido-everywhere 1)
+(ido-ubiquitous-mode 1)
+(setq-default
+ ido-auto-merge-work-directories-length 0
+ ido-default-buffer-method 'selected-window
+ ido-default-file-method 'selected-window
+ ido-enable-flex-matching t
+ ido-use-filename-at-point nil
+ ido-use-virtual-buffers t)
+
+(require 'smex)
+(global-set-key (kbd "M-x") 'smex)
+
 (require 'yaml-mode)
 (require 'json-mode)
 (add-to-list 'auto-mode-alist '("\\.json" . json-mode))
@@ -91,12 +142,16 @@
   '(progn
      (define-key haskell-mode-map (kbd "C-c i") 'ghc-flymake-insert-from-warning)))
 
-(define-key isearch-mode-map (kbd "C-o")
-  (lambda ()
-    (interactive)
-    (let ((case-fold-search isearch-case-fold-search))
-      (occur (if isearch-regexp isearch-string
-               (regexp-quote isearch-string))))))
+
+(define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
+(defun isearch-exit-other-end (rbeg rend)
+  "Exit isearch, but at the other end of the search string.
+This is useful when followed by an immediate kill."
+  (interactive "r")
+  (isearch-exit)
+  (goto-char isearch-other-end))
+
+(define-key isearch-mode-map [(control return)] 'isearch-exit-other-end)
 
 (add-hook 'after-save-hook
           'executable-make-buffer-file-executable-if-script-p)
@@ -232,7 +287,6 @@
                                     (run-hooks 'prelude-haskell-mode-hook)))))
 
 ;; (helm-mode 1)
-(ido-mode 1)
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (show-paren-mode 1)
@@ -311,11 +365,16 @@
       (if (not org-timer-current-timer) 
       (org-timer-set-timer '(16)))))
 
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(compilation-scroll-output (quote first-error))
  '(custom-enabled-themes (quote (solarized-dark)))
  '(custom-safe-themes
    (quote
@@ -324,6 +383,7 @@
    (quote
     ("~/.emacs.d/emacs-color-theme-solarized" custom-theme-directory t)))
  '(flymake-log-level 0)
+ '(flymake-no-changes-timeout 1)
  '(global-whitespace-mode t)
  '(grep-command "ag --nogroup --column -S ")
  '(haskell-check-command "hlint")
@@ -339,17 +399,10 @@
  '(helm-c-default-external-file-browser "open")
  '(helm-c-use-adaptative-sorting t)
  '(helm-command-prefix-key "C-<return>")
- '(ido-default-file-method (quote maybe-frame))
- '(ido-enable-flex-matching t)
- '(ido-everywhere t)
- '(ido-use-virtual-buffers t)
  '(inferior-lisp-program "sbcl")
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
- '(package-archives
-   (quote
-    (("gnu" . "http://elpa.gnu.org/packages/")
-     ("marmalade" . "http://marmalade-repo.org/packages/"))))
+ '(package-archives (quote (("marmalade" . "http://marmalade-repo.org/packages/") ("melpa" . "http://melpa.milkbox.net/packages/"))))
  '(python-pep8-command "/usr/local/bin/pep8")
  '(python-pep8-options (quote ("--ignore=E501" "--repeat")))
  '(python-pylint-command "~/.virtualenvs/env-prezi.dev/bin/pylint")
@@ -383,7 +436,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#002b36" :foreground "#839496" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 90 :width normal :family "Terminus"))))
+ '(default ((t (:inherit nil :stipple nil :background "#002b36" :foreground "#839496" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :height 100 :family "Monaco"))))
  '(diff-file-header ((((class color) (min-colors 88) (background dark)) (:background "#222" :weight bold))) t)
  '(diff-header ((((class color) (min-colors 88) (background dark)) (:background "#222"))) t)
  '(helm-grep-match ((t (:inherit match :background "darkblue"))) t)
