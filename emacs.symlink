@@ -47,8 +47,6 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-(setq server-socket-dir "~/.emacs.d/server")
-
 (setq savehist-additional-variables
       ;; search entries
       '(search ring regexp-search-ring)
@@ -364,6 +362,78 @@ This is useful when followed by an immediate kill."
 (add-hook 'org-clock-in-hook '(lambda () 
       (if (not org-timer-current-timer) 
       (org-timer-set-timer '(16)))))
+
+(defmacro after-load (feature &rest body)
+  "After FEATURE is loaded, evaluate BODY."
+  (declare (indent defun))
+  `(eval-after-load ,feature
+     '(progn ,@body)))
+
+;; git
+
+(require 'magit)
+(require 'git-gutter-fringe+)
+(require 'git-blame)
+(require 'git-commit-mode)
+(require 'git-rebase-mode)
+(require 'gitignore-mode)
+(require 'gitconfig-mode)
+
+(setq-default
+ magit-save-some-buffers nil
+ magit-process-popup-time 10
+ magit-diff-refine-hunk t
+ magit-completing-read-function 'magit-ido-completing-read)
+
+(global-set-key [f12] 'magit-status)
+
+(after-load 'magit
+  ;; Don't let magit-status mess up window configurations
+  ;; http://whattheemacsd.com/setup-magit.el-01.html
+  (defadvice magit-status (around magit-fullscreen activate)
+    (window-configuration-to-register :magit-fullscreen)
+    ad-do-it
+    (delete-other-windows))
+
+  (defun magit-quit-session ()
+    "Restores the previous window configuration and kills the magit buffer"
+    (interactive)
+    (kill-buffer)
+    (when (get-register :magit-fullscreen)
+      (ignore-errors
+        (jump-to-register :magit-fullscreen))))
+
+  (define-key magit-status-mode-map (kbd "q") 'magit-quit-session))
+
+
+;;; When we start working on git-backed files, use git-wip if available
+
+(after-load 'vc-git
+  (global-magit-wip-save-mode))
+  ;;(diminish 'magit-wip-save-mode))
+
+
+;;; Use the fringe version of git-gutter
+
+(after-load 'git-gutter
+  (require 'git-gutter-fringe))
+
+
+;; Convenient binding for vc-git-grep
+(global-set-key (kbd "C-x v f") 'vc-git-grep)
+
+
+(require 'git-messenger)
+(global-set-key (kbd "C-x v p") #'git-messenger:popup-message)
+
+
+;;; github
+
+(require 'yagist)
+(require 'github-browse-file)
+;(require 'bug-reference-github)
+;(add-hook 'prog-mode-hook 'bug-reference-prog-mode)
+
 
 (require 'server)
 (unless (server-running-p)

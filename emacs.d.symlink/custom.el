@@ -24,14 +24,17 @@
                                (quote prelude-haskell-mode-hook)))
                             (lambda nil
                               (ghc-init)
-                              (flymake-mode)))))
+                              (flymake-mode)))) t)
  '(helm-c-default-external-file-browser "open")
  '(helm-c-use-adaptative-sorting t)
  '(helm-command-prefix-key "C-<return>")
  '(inferior-lisp-program "sbcl")
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
- '(package-archives (quote (("marmalade" . "http://marmalade-repo.org/packages/") ("melpa" . "http://melpa.milkbox.net/packages/"))))
+ '(package-archives
+   (quote
+    (("marmalade" . "http://marmalade-repo.org/packages/")
+     ("melpa" . "http://melpa.milkbox.net/packages/"))))
  '(python-pep8-command "/usr/local/bin/pep8")
  '(python-pep8-options (quote ("--ignore=E501" "--repeat")))
  '(python-pylint-command "~/.virtualenvs/env-prezi.dev/bin/pylint")
@@ -56,8 +59,10 @@
        ("*")))
      (virtualenv-workon . "env-prezi.dev")
      (encoding . utf-8))))
+ '(server-auth-dir "~/.emacs.d/serverauth/")
  '(tramp-auto-save-directory "/tmp/tramp.autosave")
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+ '(vc-follow-symlinks t)
  '(whitespace-action (quote (cleanup warn-if-read-only)))
  '(whitespace-style (quote (face trailing tabs))))
 (custom-set-faces
@@ -66,8 +71,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#002b36" :foreground "#839496" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :height 100 :family "terminus"))))
- '(diff-file-header ((((class color) (min-colors 88) (background dark)) (:background "#222" :weight bold))) t)
- '(diff-header ((((class color) (min-colors 88) (background dark)) (:background "#222"))) t)
+ '(diff-file-header ((((class color) (min-colors 88) (background dark)) (:background "#222" :weight bold))))
+ '(diff-header ((((class color) (min-colors 88) (background dark)) (:background "#222"))))
  '(helm-grep-match ((t (:inherit match :background "darkblue"))) t)
  '(helm-selection ((t (:background "ForestGreen" :foreground "black" :underline t))) t)
  '(helm-selection-line ((t (:background "darkred" :underline t))) t)
