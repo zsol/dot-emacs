@@ -43,6 +43,7 @@
 (global-set-key (kbd "C-c m") 'camelscore-word-at-point)
 
 (package-initialize)
+(require 'diminish)
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
@@ -70,6 +71,7 @@
 (whole-line-or-region-mode t)
 (require 'undo-tree)
 (global-undo-tree-mode)
+(diminish 'undo-tree-mode)
 (require 'mic-paren)
 (paren-activate)
 (require 'expand-region)
@@ -94,6 +96,7 @@
  show-trailing-whitespace t)
 
 (global-auto-revert-mode)
+(diminish 'auto-revert-mode)
 (setq global-auto-revert-non-file-buffers t
       auto-revert-verbose nil)
 
@@ -298,6 +301,7 @@ This is useful when followed by an immediate kill."
 (global-set-key (kbd "C-c s") 'ftf-grepsource)
 
 (global-whitespace-mode 1)
+(diminish 'whitespace-mode)
 
 (define-coding-system-alias 'UTF-8 'utf-8)
 ;; (require 'comint)
@@ -409,8 +413,8 @@ This is useful when followed by an immediate kill."
 ;;; When we start working on git-backed files, use git-wip if available
 
 (after-load 'vc-git
-  (global-magit-wip-save-mode))
-  ;;(diminish 'magit-wip-save-mode))
+  (global-magit-wip-save-mode)
+  (diminish 'magit-wip-save-mode))
 
 
 ;;; Use the fringe version of git-gutter

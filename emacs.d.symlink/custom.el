@@ -24,7 +24,7 @@
                                (quote prelude-haskell-mode-hook)))
                             (lambda nil
                               (ghc-init)
-                              (flymake-mode)))) t)
+                              (flymake-mode)))))
  '(helm-c-default-external-file-browser "open")
  '(helm-c-use-adaptative-sorting t)
  '(helm-command-prefix-key "C-<return>")
