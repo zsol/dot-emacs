@@ -1,3 +1,5 @@
+;; -*- mode: lisp -*-
+
 (setq exec-path (append exec-path '("$HOME/bin" "/usr/local/bin" "/usr/local/sbin")))
 (defun chomp (str)
       "Chomp leading and tailing whitespace from STR."
@@ -136,6 +138,8 @@
 
 (autoload 'haxe-mode "haxe-mode")
 (add-to-list 'auto-mode-alist '("\\.hx" . haxe-mode))
+
+(require 'hsenv)
 
 (autoload 'ghc-init (concat user-emacs-directory (convert-standard-filename "site-lisp/ghc-mod/ghc.el")) nil t)
 (add-hook 'haskell-mode-hook (lambda () (ghc-init) (flymake-mode)))
