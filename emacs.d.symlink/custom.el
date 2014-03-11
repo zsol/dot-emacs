@@ -3,6 +3,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "stroustrup"))))
+ '(c-mode-common-hook (quote (er/add-cc-mode-expansions set-indent-tabs-mode)))
  '(compilation-scroll-output (quote first-error))
  '(custom-enabled-themes (quote (solarized-dark)))
  '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "e9143042f8b9a18cb44042e61c8c0d9da0e033b01d26f2a176c7fe9204476a4d" default)))
@@ -16,6 +18,7 @@
  '(helm-c-default-external-file-browser "open")
  '(helm-c-use-adaptative-sorting t)
  '(helm-command-prefix-key "C-<return>")
+ '(indent-tabs-mode nil)
  '(inferior-lisp-program "sbcl")
  '(inhibit-startup-screen t)
  '(js-indent-level 2)
@@ -28,6 +31,7 @@
  '(ruby-deep-indent-paren nil)
  '(safe-local-variable-values (quote ((ftf-filetypes "*") (ftf-filetypes quote ("*")) (ftf-filetypes ((quote "**"))) (ftf-filetypes ("**")) (ftf-filetypes (quote ("**"))) (ftf-filetypes ("*")) (ftf-filetypes (quote ("*"))) (virtualenv-workon . "env-prezi.dev") (encoding . utf-8))))
  '(server-auth-dir "~/.emacs.d/serverauth/")
+ '(tab-width 4)
  '(tramp-auto-save-directory "/tmp/tramp.autosave")
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(vc-follow-symlinks t)

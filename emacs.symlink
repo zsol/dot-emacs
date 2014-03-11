@@ -47,8 +47,9 @@
 (package-initialize)
 (require 'diminish)
 
-(setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(defun set-indent-tabs-mode ()
+  (set-variable 'indent-tabs-mode t))
 
 (setq savehist-additional-variables
       ;; search entries
@@ -453,3 +454,4 @@ This is useful when followed by an immediate kill."
   (load custom-file))
 
 
+(put 'upcase-region 'disabled nil)
