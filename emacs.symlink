@@ -51,6 +51,12 @@
 (defun set-indent-tabs-mode ()
   (set-variable 'indent-tabs-mode t))
 
+(defconst prezi-cc-style
+  '("stroustrup"
+    (c-offsets-alist . ((innamespace . [0])))))
+(c-add-style "prezi-cc-style" prezi-cc-style)
+
+
 (setq savehist-additional-variables
       ;; search entries
       '(search ring regexp-search-ring)

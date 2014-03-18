@@ -3,7 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "stroustrup"))))
+ '(c-default-style (quote ((c++-mode . "prezi-cc-style") (java-mode . "java") (awk-mode . "awk") (other . "stroustrup"))))
  '(c-mode-common-hook (quote (er/add-cc-mode-expansions set-indent-tabs-mode)))
  '(compilation-scroll-output (quote first-error))
  '(custom-enabled-themes (quote (solarized-dark)))
