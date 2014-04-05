@@ -14,7 +14,7 @@
  '(global-whitespace-mode t)
  '(grep-command "ag --nogroup --column -S ")
  '(haskell-check-command "hlint")
- '(haskell-mode-hook (quote (turn-on-haskell-indent turn-on-font-lock turn-on-haskell-doc-mode (lambda nil (run-hooks (quote prelude-haskell-mode-hook))) (lambda nil (ghc-init) (flymake-mode)))))
+ '(haskell-mode-hook (quote (turn-on-haskell-indent turn-on-font-lock turn-on-haskell-doc-mode (lambda nil (run-hooks (quote prelude-haskell-mode-hook))) (lambda nil (ghc-init) (flymake-mode)))) t)
  '(helm-c-default-external-file-browser "open")
  '(helm-c-use-adaptative-sorting t)
  '(helm-command-prefix-key "C-<return>")
@@ -42,7 +42,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background nil :foreground nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :foundry "apple" :family "Monaco"))))
+ '(default ((t (:inherit nil :stipple nil :background "#002b36" :foreground "#839496" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 132 :width normal :family "Terminus"))))
  '(diff-file-header ((((class color) (min-colors 88) (background dark)) (:background "#222" :weight bold))))
  '(diff-header ((((class color) (min-colors 88) (background dark)) (:background "#222"))))
  '(helm-grep-match ((t (:inherit match :background "darkblue"))) t)
