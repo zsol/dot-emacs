@@ -14,7 +14,7 @@
  '(global-whitespace-mode t)
  '(grep-command "ag --nogroup --column -S ")
  '(haskell-check-command "hlint")
- '(haskell-mode-hook (quote (turn-on-haskell-indent turn-on-font-lock turn-on-haskell-doc-mode (lambda nil (run-hooks (quote prelude-haskell-mode-hook))) (lambda nil (ghc-init) (flymake-mode)))) t)
+ '(haskell-mode-hook (quote (turn-on-haskell-indent turn-on-font-lock turn-on-haskell-doc-mode (lambda nil (run-hooks (quote prelude-haskell-mode-hook))) (lambda nil (ghc-init) (flymake-mode)))))
  '(helm-c-default-external-file-browser "open")
  '(helm-c-use-adaptative-sorting t)
  '(helm-command-prefix-key "C-<return>")
@@ -29,7 +29,7 @@
  '(python-pylint-command "~/.virtualenvs/env-prezi.dev/bin/pylint")
  '(ruby-deep-arglist nil)
  '(ruby-deep-indent-paren nil)
- '(safe-local-variable-values (quote ((ftf-filetypes "*") (ftf-filetypes quote ("*")) (ftf-filetypes ((quote "**"))) (ftf-filetypes ("**")) (ftf-filetypes (quote ("**"))) (ftf-filetypes ("*")) (ftf-filetypes (quote ("*"))) (virtualenv-workon . "env-prezi.dev") (encoding . utf-8))))
+ '(safe-local-variable-values (quote ((sbt:program-name . "scripts/sbt") (sbt:program-name . scripts/sbt) (ftf-filetypes "*") (ftf-filetypes quote ("*")) (ftf-filetypes ((quote "**"))) (ftf-filetypes ("**")) (ftf-filetypes (quote ("**"))) (ftf-filetypes ("*")) (ftf-filetypes (quote ("*"))) (virtualenv-workon . "env-prezi.dev") (encoding . utf-8))))
  '(server-auth-dir "~/.emacs.d/serverauth/")
  '(tab-width 4)
  '(tramp-auto-save-directory "/tmp/tramp.autosave")
@@ -42,9 +42,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#002b36" :foreground "#839496" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 132 :width normal :family "Terminus"))))
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :foundry "xos4" :family "Terminus"))))
  '(diff-file-header ((((class color) (min-colors 88) (background dark)) (:background "#222" :weight bold))))
  '(diff-header ((((class color) (min-colors 88) (background dark)) (:background "#222"))))
+ '(flymake-errline ((t (:inverse-video nil :underline "red" :slant normal :weight normal))))
+ '(flymake-infoline ((t (:underline "DarkGreen"))))
  '(helm-grep-match ((t (:inherit match :background "darkblue"))) t)
  '(helm-selection ((t (:background "ForestGreen" :foreground "black" :underline t))) t)
  '(helm-selection-line ((t (:background "darkred" :underline t))) t)
