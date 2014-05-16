@@ -153,7 +153,7 @@
 (add-hook 'haskell-mode-hook (lambda () (ghc-init) (flymake-mode)))
 (eval-after-load 'haskell-mode
   '(progn
-     (define-key haskell-mode-map (kbd "C-c i") 'ghc-flymake-insert-from-warning)))
+     (define-key haskell-mode-map (kbd "C-c i") 'ghc-check-insert-from-warning)))
 
 
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
@@ -251,7 +251,7 @@ This is useful when followed by an immediate kill."
 ;; 	     (if (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
 ;; 		 (flymake-mode))
 ;; 	     ))
-(flymake-cursor-mode 1)
+;(flymake-cursor-mode 1)
 
 (setq jsonlint "jsonlint")
 (when (load "flymake" t)
