@@ -26,3 +26,6 @@
 [submodule "emacs.d.symlink/site-lisp/find-things-fast"]
 	path = emacs.d.symlink/site-lisp/find-things-fast
 	url = git@github.com:zsol/find-things-fast
+[submodule "emacs.d/site-lisp/powerline"]
+	path = emacs.d/site-lisp/powerline
+	url = https://github.com/milkypostman/powerline
